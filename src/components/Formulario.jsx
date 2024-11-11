@@ -45,8 +45,8 @@ const Formulario = ({
       });
     } else {
       addTodo({
-        id: Date.now(),
         ...todo,
+        id: Date.now(),
         state: state === "completada",
       });
       setTodo(initialValue);
