@@ -1,30 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Formulario from "./components/Formulario";
 import Todos from "./components/Todos";
 
-const initialStateTodos = [
-  {
-    id: 1,
-    title: "Tarea 1",
-    description: "Descripción 1",
-    state: true,
-    priority: false,
-  },
-  {
-    id: 2,
-    title: "Tarea 2",
-    description: "Descripción 2",
-    state: true,
-    priority: true,
-  },
-  {
-    id: 3,
-    title: "Tarea 3",
-    description: "Descripción 3",
-    state: false,
-    priority: false,
-  },
-];
+const initialStateTodos = JSON.parse(localStorage.getItem("todos")) || [];
 
 function App() {
   const [todos, setTodos] = useState(initialStateTodos);
@@ -56,6 +34,10 @@ function App() {
     setEditMode(true);
     setTodoToEdit(todo);
   };
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   return (
     <div className="container mb-2">
